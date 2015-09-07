@@ -3,7 +3,7 @@ import random
 import urllib2
 
 from user_agents import USER_AGENTS
-from scrapy.conf import settings
+# from scrapy.conf import settings
 
 
 class RandomUserAgentMiddleware(object):

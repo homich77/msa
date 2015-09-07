@@ -56,8 +56,9 @@ class RandomProxy(object):
                         (proxy_address, len(self.proxies)))
         try:
             self.proxies.remove(proxy_address)
-            p = Proxy.objects.get(address=proxy_address)
-            p.status = -1
-            p.save()
+            p = Proxy.objects.get(address=proxy_address, status__gt=0)
+            if p:
+                p.status = -1
+                p.save()
         except ValueError:
             pass
