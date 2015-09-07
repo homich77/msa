@@ -9,7 +9,7 @@ from main.models import Proxy
 from threading import Thread
 from Queue import Queue
 from scrapy.crawler import CrawlerProcess
-from scrap.spiders.msa import MsaSpider
+from scrap.spiders.proxylist_usa import ProxylistUsaSpider
 
 
 class GetProxies(object):
@@ -23,7 +23,7 @@ class GetProxies(object):
                 'url': 'http://proxy.tekbreak.com/200/json',
                 'port_in_ip': False
             }]
-        self.spiders = [MsaSpider]
+        self.spiders = [ProxylistUsaSpider]
         self.proxies = []
         self.get()
 
