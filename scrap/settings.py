@@ -68,7 +68,7 @@ RETRY_HTTP_CODES = [500, 503, 504, 400, 403, 404, 408]
 
 
 # PROXY_LIST = 'list.txt'
-PROXY_LIST = '/home/ijn/pythons_projects/msa/proxies/upl.txt'
+# PROXY_LIST = '/home/ijn/pythons_projects/msa/proxies/upl.txt'
 # PROXY_LIST = 'list2.txt'
 
 # HTTP_PROXY = 'http://46.149.86.215:8080'

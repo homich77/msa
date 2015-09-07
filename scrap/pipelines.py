@@ -1,3 +1,6 @@
+import os
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "extract_data.settings")
+
 from main.models import MainData, City
 
 
