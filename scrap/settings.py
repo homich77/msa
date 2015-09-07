@@ -1,24 +1,13 @@
 # -*- coding: utf-8 -*-
 
 # Scrapy settings for scrap project
-#
-# For simplicity, this file contains only settings considered important or
-# commonly used. You can find more settings consulting the documentation:
-#
-#     http://doc.scrapy.org/en/latest/topics/settings.html
-#     http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
-#     http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
 
 BOT_NAME = 'scrap'
 
 SPIDER_MODULES = ['scrap.spiders']
 NEWSPIDER_MODULE = 'scrap.spiders'
+LOG_LEVEL = 'ERROR'
 
-
-# Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'scrap (+http://www.yourdomain.com)'
-
-# Configure maximum concurrent requests performed by Scrapy (default: 16)
 CONCURRENT_REQUESTS = 5
 
 # Configure a delay for requests for the same website (default: 0)
@@ -54,8 +43,8 @@ COOKIES_ENABLED = False
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
     'scrap.middlewares.RandomUserAgentMiddleware': 400,
-    'scrap.middlewares.ProxyMiddleware': 410,
-    'scrap.randomproxy.RandomProxy': 100,
+    # 'scrap.middlewares.ProxyMiddleware': 410,
+    'scrap.middlewares.RandomProxy': 100,
     'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None
     # 'scrapy.contrib.downloadermiddleware.useragent.UserAgentMiddleware': None
 }

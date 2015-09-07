@@ -15,6 +15,6 @@ class MsaItem(scrapy.Item):
     phone = scrapy.Field()
     body = scrapy.Field()
 
+
 class PtfItem(scrapy.Item):
-    ip = scrapy.Field()
-    port = scrapy.Field()
+    address = scrapy.Field()

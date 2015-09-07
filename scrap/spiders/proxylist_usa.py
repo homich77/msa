@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 import scrapy
-# from scrap.items import PtfItem
+import os
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "extract_data.settings")
+from scrap.items import PtfItem
 
-# settings.overrides['HTTP_PROXY'] = 300 
-use_proxy = 'False'
 
 class ProxylistUsaSpider(scrapy.Spider):
     name = "pl_usa"
@@ -11,17 +11,17 @@ class ProxylistUsaSpider(scrapy.Spider):
     start_urls = (
         'http://www.us-proxy.org/',
     )
+    use_proxy = False
 
     def parse(self, response):
-        print response.url
-        # item = PtfItem()
-        # item['ip'] = "".join(response.xpath('//tr/td[1]/text()').extract())
-        # item['port'] = "".join(response.xpath('//tr/td[2]/text()').extract())
-        ips_list = response.xpath('//tr/td[1]/text()').extract()
-        ports_list = response.xpath('//tr/td[2]/text()').extract()
-        with open('pl_usa.txt', 'w') as f:
-            for ip in ips_list:
-                f.writelines(ip+":"+ports_list.pop(0)+'\n')
-        # for
-        # return item
-        # pass
+        for tr in response.xpath('//tr'):
+            http = 'http'
+            if ''.join(tr.xpath('td[7]/text()').extract()) == 'yes':
+                continue
+                # http = 'https'
+            ip = ''.join(tr.xpath('td[1]/text()').extract())
+            port = ''.join(tr.xpath('td[2]/text()').extract())
+            if ip and port:
+                o = PtfItem()
+                o['address'] = '%s://%s:%s' % (http, ip, port)
+                yield o

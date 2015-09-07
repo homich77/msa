@@ -1,9 +1,11 @@
-import re
+import re, os
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "extract_data.settings")
 
 from scrapy import Request, Spider
 from scrap.items import MsaItem
 from scrapy.utils.response import open_in_browser
 import logging
+
 
 class MsaSpider(Spider):
     name = "msa"
@@ -12,19 +14,12 @@ class MsaSpider(Spider):
         # 'http://sandiego.craigslist.org',
         # 'http://atlanta.craigslist.org',
         'http://newyork.craigslist.org',
-        # 'http://google.com'
-
-        # 'http://ipinfo.io/json'
     ]
-
-    # def parse(self, response):
-        # print response.body
+    use_proxy = True
 
     def parse(self, response):
-        # print response.url
         list_of_cities = response.xpath('//h5[text()="us cities"]/parent::li/ul//a[@href][text()!="more ..."]/@href').extract()
-        print list_of_cities
-        # return
+        # print list_of_cities
         for l in list_of_cities:
             r = Request(l + 'search/msa', callback=self.parse_city)
             r.meta['base_url'] = l[:-1]
@@ -42,7 +37,6 @@ class MsaSpider(Spider):
             yield Request(absolute_url, meta={'base_url': base_url},
                           callback=self.parse_attr)
             return
-        return
 
         next_page = response.css("a.button.next::attr(href)")
         if next_page:
