@@ -1,0 +1,18 @@
+DB settings:
+
+sudo -u postgres psql
+
+Enter commands:
+CREATE USER extr_admin WITH PASSWORD '123';
+CREATE DATABASE extract_data;
+GRANT ALL PRIVILEGES ON DATABASE extract_data to extr_admin;
+
+
+To install Tor:
+sudo apt-get install tor polipo
+
+Add into /etc/polipo/config:
+socksParentProxy = localhost:9050
+diskCacheRoot=""
+disableLocalInterface=""
+

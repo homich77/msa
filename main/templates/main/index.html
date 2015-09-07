@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <table>
+    <tr>
+        <th></th>
+        <th>Title</th>
+        <th>City</th>
+        <th>Email</th>
+        <th>Phone</th>
+    </tr>
+    {% for r in result %}
+        <tr>
+            <td style="border-bottom: 1px solid black;"><a href="{{ r.link }}" target="_blank">Link</a></td>
+            <td style="border-bottom: 1px solid black;">{{ r.title }}</td>
+            <td style="border-bottom: 1px solid black;">{{ r.city.name }}</td>
+            <td style="border-bottom: 1px solid black;">{{ r.email }}</td>
+            <td style="border-bottom: 1px solid black;">{{ r.phone }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+</body>
+</html>
