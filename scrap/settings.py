@@ -66,7 +66,7 @@ RETRY_TIMES = 2
 # Retry on most error codes since proxies fail for different reasons
 RETRY_HTTP_CODES = [500, 503, 504, 400, 403, 404, 408]
 
-
+PROXY_LIST = 'pl_usa_checked.txt'
 # PROXY_LIST = 'list.txt'
 # PROXY_LIST = '/home/ijn/pythons_projects/msa/proxies/upl.txt'
 # PROXY_LIST = 'list2.txt'

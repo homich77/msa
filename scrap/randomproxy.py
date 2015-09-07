@@ -37,8 +37,10 @@ class RandomProxy(object):
 
     def process_request(self, request, spider):
         # Don't overwrite with a random one (server-side state for IP)
-        if 'proxy' in request.meta:
+        if spider.name == 'pl_usa':
             return
+        # if 'proxy' in request.meta:
+        #     return
         if not len(self.proxies):
             return
 
@@ -50,6 +52,8 @@ class RandomProxy(object):
         #     request.headers['Proxy-Authorization'] = basic_auth
 
     def process_exception(self, request, exception, spider):
+        if spider.name == 'pl_usa':
+            return
         proxy_address = request.meta['proxy']
         # print 'EXCEPTION: %s' % proxy
         logging.warning('Removing failed proxy <%s>, %d proxies left' %
