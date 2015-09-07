@@ -25,3 +25,4 @@ class Proxy(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
     check_date = models.DateTimeField(auto_now=True)
     status = models.IntegerField(default=0)
+    last_status_code = models.PositiveIntegerField(default=0)
