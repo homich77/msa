@@ -22,7 +22,7 @@ virtualenv venv
 Ubuntu:
 . venv/bin/activate
 Windows:
-.env\Scripts\activate
+venv\Scripts\activate
 
 
 * Install required modules
