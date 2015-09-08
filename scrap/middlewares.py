@@ -61,9 +61,7 @@ class RandomProxy(object):
             p = self.get_proxy_model(proxy)
             proxy = 'http://' + proxy
             if p:
-                if Proxy.objects.filter(address=proxy).exists():
-                    p.delete()
-                else:
+                if not Proxy.objects.filter(address=proxy).exists():
                     p.address = proxy
                     p.save()
 
