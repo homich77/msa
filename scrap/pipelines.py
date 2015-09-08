@@ -23,4 +23,5 @@ class ScrapPipeline(object):
                 db_data.save()
             return item
         else:
+            item['address'] = 'http://%s' % item['address']
             Proxy.objects.get_or_create(address=item['address'])

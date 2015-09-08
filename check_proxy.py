@@ -3,17 +3,21 @@ import sys
 import os
 import urllib2
 import json
+from scrap.spiders.msa import MsaSpider
+from scrap.spiders.webanetlabs import WALSpider
+
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "extract_data.settings")
 
 from main.models import Proxy
 from threading import Thread
 from Queue import Queue
 from scrapy.crawler import CrawlerProcess
+from scrapy.utils.project import get_project_settings
 from scrap.spiders.proxylist_usa import ProxylistUsaSpider
 
 
 class GetProxies(object):
-    def __init__(self):
+    def __init__(self, start_main_spider=False):
         self.urls = [
             {
                 'url': 'https://happy-proxy.com/fresh_proxies?key=6fd3e79b99a7be9b',
@@ -23,12 +27,17 @@ class GetProxies(object):
                 'url': 'http://proxy.tekbreak.com/200/json',
                 'port_in_ip': False
             }]
-        self.spiders = [ProxylistUsaSpider]
+        self.spiders = [ProxylistUsaSpider, WALSpider]
         self.proxies = []
         self.get()
 
         ch = CheckProxy()
         ch.set_proxies_list()
+
+        if start_main_spider:
+            process = CrawlerProcess(get_project_settings())
+            process.crawl(MsaSpider)
+            process.start()
 
     def get(self):
         for proxy in self.urls:
@@ -42,7 +51,7 @@ class GetProxies(object):
                 self.save(self.get_ip_port(d, proxy))
 
         # Get proxies from spiders
-        process = CrawlerProcess()
+        process = CrawlerProcess(get_project_settings())
         for s in self.spiders:
             process.crawl(s)
         process.start()
@@ -83,9 +92,6 @@ class CheckProxy(object):
     def set_proxies_list(self):
         try:
             for proxy in Proxy.objects.filter(status=0):
-                # self.number_lines += 1
-                # if self.number_lines > 10:
-                #     break
                 self.q.put(proxy.address)
 
             self.q.join()

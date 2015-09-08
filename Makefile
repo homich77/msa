@@ -1,3 +1,5 @@
-run_polipo:
-	@echo ----- Running polipo instances -----
-	polipo
+help:
+	@echo "make venv - create virtual environment"
+
+venv:
+	virtualenv -p python2 .env

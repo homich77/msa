@@ -23,5 +23,5 @@ class ProxylistUsaSpider(scrapy.Spider):
             port = ''.join(tr.xpath('td[2]/text()').extract())
             if ip and port:
                 o = PtfItem()
-                o['address'] = '%s://%s:%s' % (http, ip, port)
+                o['address'] = '%s:%s' % (ip, port)
                 yield o
