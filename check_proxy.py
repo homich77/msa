@@ -3,10 +3,11 @@ import sys
 import os
 import urllib2
 import json
+
 from scrap.spiders.msa import MsaSpider
 from scrap.spiders.webanetlabs import WALSpider
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "extract_data.settings")
+# os.environ.setdefault("DJANGO_SETTINGS_MODULE", "extract_data.settings")
 
 from main.models import Proxy
 from threading import Thread
@@ -155,4 +156,5 @@ class CheckProxy(object):
 
 
 if __name__ == '__main__':
-    g = GetProxies()
+    print sys.args[0]
+    # g = GetProxies()

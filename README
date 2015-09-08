@@ -1,7 +1,14 @@
 * Need to install PostgreSQL
 
-Ubuntu DB settings:
+Ubuntu:
 sudo -u postgres psql
+Windows:
+http://www.enterprisedb.com/products-services-training/pgdownload
+
+
+* To work with Python need for Windows:
+.Net Framework 3.5(include 2.0 and 3.0)
+Microsoft Visual C++ Compiler Package for Python 2.7 (http://www.microsoft.com/en-us/download/details.aspx?id=44266)
 
 
 * In PostgreSQL enter commands:
@@ -10,9 +17,26 @@ CREATE DATABASE extract_data;
 GRANT ALL PRIVILEGES ON DATABASE extract_data to extr_admin;
 
 
-Terminal command:
+* Create virtualenv and activate
+virtualenv venv
+Ubuntu:
+. venv/bin/activate
+Windows:
+.env\Scripts\activate
+
+
+* Install required modules
+pip install -r requirements.txt
+
+
+* Filling DB:
 ./manage.py migrate
 
 
 * Create indexes in PostgreSQL:
 create index on main_proxy(address);
+
+
+* To run work
+export DJANGO_SETTINGS_MODULE=extract_data.settings
+python check_proxy.py
