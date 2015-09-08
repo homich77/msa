@@ -1,6 +1,6 @@
 from main.models import MainData
-import re, os
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "extract_data.settings")
+import re
+# os.environ.setdefault("DJANGO_SETTINGS_MODULE", "extract_data.settings")
 
 from scrapy import Request, Spider
 from scrap.items import MsaItem
@@ -13,8 +13,7 @@ class MsaSpider(Spider):
     allowed_domains = ["craigslist.org"]
     start_urls = [
         # 'http://sandiego.craigslist.org',
-        # 'http://atlanta.craigslist.org',
-        'http://newyork.craigslist.org',
+        'http://atlanta.craigslist.org',
     ]
     use_proxy = True
 

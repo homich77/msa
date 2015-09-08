@@ -17,24 +17,24 @@ class RandomUserAgentMiddleware(object):
 
 class RandomProxy(object):
     def __init__(self, settings):
-        self.proxies = list(Proxy.objects.filter(status__gt=0)\
-                            .values_list('address', flat=True))
+        self.proxies = ['http://46.149.86.215:8080']
+        # self.proxies = list(Proxy.objects.filter(status__gt=0)\
+        #                     .values_list('address', flat=True))
 
     @classmethod
     def from_crawler(cls, crawler):
         return cls(crawler.settings)
 
     def process_request(self, request, spider):
+        print 1
         # Don't overwrite with a random one (server-side state for IP)
-        if not spider.use_proxy or not len(self.proxies):
+        if 'proxy' in request.meta and request.meta.get('retry_times', 0) < 3 \
+                or not spider.use_proxy or not len(self.proxies):
             return
-
+        print 'save proxy'
         proxy = random.choice(self.proxies)
         request.meta['proxy'] = proxy
-        logging.debug("ASSIGNED PROXY %s" % proxy)
-        # if proxy_user_pass:
-        #     basic_auth = 'Basic ' + base64.encodestring(proxy_user_pass)
-        #     request.headers['Proxy-Authorization'] = basic_auth
+        # logging.debug("ASSIGNED PROXY %s" % proxy)
 
     def process_exception(self, request, exception, spider):
         if not spider.use_proxy:
@@ -45,8 +45,9 @@ class RandomProxy(object):
                         (proxy_address, len(self.proxies)))
         try:
             self.proxies.remove(proxy_address)
-            p = Proxy.objects.get(address=proxy_address, status__gt=0)
+            p = Proxy.objects.filter(address=proxy_address)
             if p:
+                p = p[0]
                 p.status = -1
                 p.save()
         except ValueError:

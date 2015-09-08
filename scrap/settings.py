@@ -6,7 +6,7 @@ BOT_NAME = 'scrap'
 
 SPIDER_MODULES = ['scrap.spiders']
 NEWSPIDER_MODULE = 'scrap.spiders'
-LOG_LEVEL = 'ERROR'
+# LOG_LEVEL = 'ERROR'
 
 CONCURRENT_REQUESTS = 5
 
@@ -43,22 +43,14 @@ COOKIES_ENABLED = False
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
     'scrap.middlewares.RandomUserAgentMiddleware': 400,
-    # 'scrap.middlewares.ProxyMiddleware': 410,
     'scrap.middlewares.RandomProxy': 100,
     'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None
-    # 'scrapy.contrib.downloadermiddleware.useragent.UserAgentMiddleware': None
 }
-
+DOWNLOAD_TIMEOUT = 180
 # Retry many times since proxies often fail
 # RETRY_TIMES = 10
-RETRY_TIMES = 2
-# Retry on most error codes since proxies fail for different reasons
+RETRY_TIMES = 10
 RETRY_HTTP_CODES = [500, 503, 504, 400, 403, 404, 408]
-
-PROXY_LIST = 'pl_usa_checked.txt'
-# PROXY_LIST = 'list.txt'
-# PROXY_LIST = '/home/ijn/pythons_projects/msa/proxies/upl.txt'
-# PROXY_LIST = 'list2.txt'
 
 # HTTP_PROXY = 'http://46.149.86.215:8080'
 # HTTP_PROXY = 'http://134.249.139.239:8080'
@@ -71,8 +63,6 @@ PROXY_LIST = 'pl_usa_checked.txt'
 #    'scrapy.telnet.TelnetConsole': None,
 #}
 
-# Configure item pipelines
-# See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
     'scrap.pipelines.ScrapPipeline': 300,
 }
