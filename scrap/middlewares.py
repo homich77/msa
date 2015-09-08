@@ -17,8 +17,8 @@ class RandomUserAgentMiddleware(object):
 
 class RandomProxy(object):
     def __init__(self, settings):
-        self.proxies = Proxy.objects.filter(status__gt=0)\
-            .values_list('address', flat=True)
+        self.proxies = list(Proxy.objects.filter(status__gt=0)\
+                            .values_list('address', flat=True))
 
     @classmethod
     def from_crawler(cls, crawler):
@@ -26,11 +26,7 @@ class RandomProxy(object):
 
     def process_request(self, request, spider):
         # Don't overwrite with a random one (server-side state for IP)
-        if not spider.use_proxy:
-            return
-        # if 'proxy' in request.meta:
-        #     return
-        if not len(self.proxies):
+        if not spider.use_proxy or not len(self.proxies):
             return
 
         proxy = random.choice(self.proxies)

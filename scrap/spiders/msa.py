@@ -10,7 +10,7 @@ import logging
 
 class MsaSpider(Spider):
     name = "msa"
-    allowed_domains = ["craigslist.org", "ipinfo.io"]
+    allowed_domains = ["craigslist.org"]
     start_urls = [
         # 'http://sandiego.craigslist.org',
         # 'http://atlanta.craigslist.org',

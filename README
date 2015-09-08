@@ -1,8 +1,10 @@
-DB settings:
+* Need to install PostgreSQL
 
+Ubuntu DB settings:
 sudo -u postgres psql
 
-Enter commands:
+
+* In PostgreSQL enter commands:
 CREATE USER extr_admin WITH PASSWORD '123';
 CREATE DATABASE extract_data;
 GRANT ALL PRIVILEGES ON DATABASE extract_data to extr_admin;
@@ -12,5 +14,5 @@ Terminal command:
 ./manage.py migrate
 
 
-Create indexes:
-- create index on main_proxy(address);
+* Create indexes in PostgreSQL:
+create index on main_proxy(address);
