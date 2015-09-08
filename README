@@ -40,3 +40,7 @@ create index on main_proxy(address);
 * To run work
 export DJANGO_SETTINGS_MODULE=extract_data.settings
 python check_proxy.py
+
+
+* To run craigslist spider
+scrapy crawl msa

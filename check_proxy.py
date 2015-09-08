@@ -44,7 +44,7 @@ class GetProxies(object):
         for proxy in self.urls:
             print '*'*50
             print 'Open url: %s' % proxy['url']
-            response = urllib2.urlopen(proxy['url'])
+            response = urllib2.urlopen('http://'+proxy['url'])
 
             data = json.loads(response.read())
             print 'Get %s proxies' % len(data)
@@ -156,5 +156,4 @@ class CheckProxy(object):
 
 
 if __name__ == '__main__':
-    print sys.args[0]
-    # g = GetProxies()
+    g = GetProxies(sys.argv[1])

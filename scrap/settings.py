@@ -6,7 +6,7 @@ BOT_NAME = 'scrap'
 
 SPIDER_MODULES = ['scrap.spiders']
 NEWSPIDER_MODULE = 'scrap.spiders'
-LOG_LEVEL = 'ERROR'
+LOG_LEVEL = 'WARNING'
 
 CONCURRENT_REQUESTS = 5
 
