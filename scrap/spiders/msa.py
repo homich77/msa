@@ -1,4 +1,4 @@
-from main.models import Proxy
+from main.models import MainData
 import re, os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "extract_data.settings")
 
@@ -35,7 +35,7 @@ class MsaSpider(Spider):
         base_url = response.meta['base_url']
         for link in links:
             absolute_url = base_url + link
-            if not Proxy.objects.filter(address=absolute_url).exists():
+            if not MainData.objects.filter(link=absolute_url).exists():
                 yield Request(absolute_url, meta={'base_url': base_url},
                               callback=self.parse_attr)
 
