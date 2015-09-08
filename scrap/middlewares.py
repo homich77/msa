@@ -73,7 +73,8 @@ class RandomProxy(object):
             return
         proxy_address = request.meta.get('proxy', '')
         # print 'EXCEPTION: %s' % proxy
-        logging.warning('Removing failed proxy <%s>, %d proxies left' %
-                        (proxy_address, len(self.proxies)))
+
         if proxy_address:
+            logging.warning('Removing failed proxy <%s>, %d proxies left' %
+                            (proxy_address, len(self.proxies)))
             self.save_failed_proxy(proxy_address)
