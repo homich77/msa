@@ -1,12 +1,11 @@
 import requests
 import sys
-import os
 import urllib2
 import json
 
 from scrap.spiders.msa import MsaSpider
 from scrap.spiders.webanetlabs import WALSpider
-
+from scrap.spiders.prime_speed import PrimeSpeedSpider
 # os.environ.setdefault("DJANGO_SETTINGS_MODULE", "extract_data.settings")
 
 from main.models import Proxy
@@ -15,7 +14,6 @@ from Queue import Queue
 from scrapy.crawler import CrawlerProcess
 from scrapy.utils.project import get_project_settings
 from scrap.spiders.proxylist_usa import ProxylistUsaSpider
-
 
 class GetProxies(object):
     def __init__(self, start_main_spider=False):
@@ -28,7 +26,7 @@ class GetProxies(object):
                 'url': 'http://proxy.tekbreak.com/200/json',
                 'port_in_ip': False
             }]
-        self.spiders = [ProxylistUsaSpider, WALSpider]
+        self.spiders = [ProxylistUsaSpider, WALSpider, PrimeSpeedSpider]
         self.proxies = []
         self.get()
 
