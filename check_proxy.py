@@ -156,4 +156,5 @@ class CheckProxy(object):
 
 
 if __name__ == '__main__':
-    g = GetProxies(sys.argv[1])
+    g = GetProxies()
+
